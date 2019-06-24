@@ -71,15 +71,15 @@ func New{{.Name}}JSONCache(c *cacher.JSONCache) *{{.Name}}JSONCache {
 
 func (c *{{.Name}}JSONCache) Get(key {{.KeyType.String}}) ({{.ValType.String}}, bool) {
 	var val {{.ValType.String}}
-	val, err := c.data.GetJSON(key, &val)
-	return val, err != nil
+	err := c.data.GetJSON(key, &val)
+	return val, err == nil
 }
 
-func (c *{{.Name}}InMemCache) Set(key {{.KeyType.String}}, value {{.ValType.String}}) {
+func (c *{{.Name}}JSONCache) Set(key {{.KeyType.String}}, value {{.ValType.String}}) {
 	c.data.SetJSON(key, value)
 }
 
-func (c *{{.Name}}InMemCache) ClearKey(key {{.KeyType.String}}) {
+func (c *{{.Name}}JSONCache) ClearKey(key {{.KeyType.String}}) {
 	c.data.ClearKey(key)
 }
 
